@@ -1,6 +1,6 @@
 <?php
 /**
- * Template to show `portfolio` CPT entries grouped by month.
+ * Template to show `Full Parroquial` CPT entries grouped by month.
  */
 //Removes Title and Description on CPT Archive
 remove_action('genesis_before_loop', 'genesis_do_cpt_archive_title_description');
@@ -64,15 +64,8 @@ function sk_custom_loop() {
 
             // current post's published date month.
             $current_post_month = get_the_date('F');
-
-//             if (0 === $query->current_post) { // for the oldest post, show the Month Year.
-//                 echo '<h2 class="date">';
-//                 the_date('F Y');
-//                 echo '</h2>';
-//             } else { // for all other posts, get the month of the previous post in the loop.
                 $p = $query->current_post - 1;
                 $previous_post_month = mysql2date('F', $query->posts[$p]->post_date);
-//             }
 
             // if the current post's month does not match with that of the next one, show the Month Year.
             if ($previous_post_month !== $current_post_month) {

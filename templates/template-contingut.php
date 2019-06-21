@@ -20,12 +20,6 @@ function sjdg_attributes_site_inner($attributes) {
     return $attributes;
 }
 
-// Remove div.site-inner's div.wrap
-//add_filter('genesis_structural_wrap-site-inner', '__return_empty_string');
-//* Remove .site-inner
-//add_filter('genesis_markup_site-inner', '__return_null');
-//add_filter('genesis_markup_content-sidebar-wrap', '__return_null');
-//add_filter('genesis_markup_content', '__return_null');
 // Force full width content layout.
 add_filter('genesis_pre_get_option_site_layout', '__genesis_return_full_width_content');
 
@@ -93,7 +87,7 @@ function sjdg_contingut_content() {
             // Displayed in two columns, so using column classes
             $class = 0 == $i || 0 == $i % 2 ? 'image-text' : 'text-image';
 
-            // Build the video box
+            // Build the box
             ?>
             <div class="<?php echo $class; ?>">
                 <div class="contingut-images">
@@ -121,33 +115,14 @@ function sjdg_contingut_content() {
         } //for
     } //if continguts
 }
-?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(".more-0").click(function () {
-            this.classList.toggle("active");
-            $(".i-0").toggle(300);
 
-        });
-        $(".more-1").click(function () {
-            this.classList.toggle("active");
-            $(".i-1").toggle(300);
+// Enqueue Scripts
+add_action('wp_enqueue_scripts', 'sjdg_enqueue_more_contingut');
+function sjdg_enqueue_more_contingut() {
+    wp_enqueue_script(
+            'sjdg-contingut', get_stylesheet_directory_uri() . '/js/sjdg-more.js', array('jquery'), CHILD_THEME_VERSION, true
+    );
 
-        });
-        $(".more-2").click(function () {
-            this.classList.toggle("active");
-            $(".i-2").toggle(300);
+}
 
-        });
-        $(".more-3").click(function () {
-            this.classList.toggle("active");
-            $(".i-3").toggle(300);
-
-        });
-    });
-
-</script>
-
-<?php
 genesis();

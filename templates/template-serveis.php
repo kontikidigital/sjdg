@@ -105,8 +105,8 @@ function sjdg_serveis_content() {
                                 </div> <!-- resum-->
                                 <?php if ($enllac_text_complet) { ?>
                                     <div class="link-text-complet">
-                                        <?php echo $enllac_text_complet; ?>
-                                    </div> <!-- link-text-complet-->
+                                    <a class="button" href="<?php echo $enllac_text_complet; ?>"> <?php echo __('Llegir més', 'sjdg');?></a>
+                                   </div> <!-- link-text-complet-->
                                 <?php } ?>
                             </div> <!-- serveis-text-->
                         </div> <!-- serveis-text-overlay-->
@@ -124,7 +124,7 @@ function sjdg_serveis_content() {
                                 </div> <!-- resum-->
                                 <?php if ($enllac_text_complet) { ?>
                                     <div class="link-text-complet">
-                                        <?php echo $enllac_text_complet; ?>
+                                    <a class="button" href="<?php echo $enllac_text_complet; ?>"> <?php echo __('Llegir més', 'sjdg');?></a>
                                     </div> <!-- link-text-complet-->
                                 <?php } ?>
                             </div> <!-- serveis-text-->
@@ -140,7 +140,7 @@ function sjdg_serveis_content() {
                                 </div> <!--resum-->
                                 <?php if ($enllac_text_complet) { ?>
                                     <div class="link-text-complet">
-                                        <?php echo $enllac_text_complet; ?>
+                                        <a class="button" href="<?php echo $enllac_text_complet; ?>"> <?php echo __('Llegir més', 'sjdg');?></a>
                                     </div> <!-- link-text-complet-->
                                 <?php } ?> <!-- if ($enllac_text_complet)-->
                             </div> <!-- serveis-text-->
@@ -207,31 +207,16 @@ function sjdg_tramits_contingut() {
     </div><!--serveis-bottom-->
 
 
-    <?php } //if ?>
+    <?php } //if 
+}
 
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-         for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function () {
-               for(var j = 0; j < acc.length; j++) {
-                acc[j].nextElementSibling.style.maxHeight = null;
-                acc[j].classList.remove('active');
-              }
-               this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                }
-            });
-        }
+// Enqueue Scripts
+add_action('wp_enqueue_scripts', 'sjdg_enqueue_more_accordion');
+function sjdg_enqueue_more_accordion() {
+    wp_enqueue_script(
+            'sjdg-accordion', get_stylesheet_directory_uri() . '/js/sjdg-accordion.js', array('jquery'), CHILD_THEME_VERSION, true
+    );
 
-    </script>
-
-   <?php
 }
 
 genesis();
